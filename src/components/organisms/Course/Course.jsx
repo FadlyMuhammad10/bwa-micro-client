@@ -20,8 +20,11 @@ export default function Course() {
       </div>
       <div className="grid grid-cols-4 gap-6 mt-6 min-w-[272px] max-h-[232px]">
         {Array.from({ length: 4 }).map((_, index) => (
-          <div key={index} className="flex flex-col gap-4  ">
-            <div className="relative w-full h-[170px] overflow-hidden group">
+          <div
+            key={index}
+            className="flex flex-col gap-4 hover:cursor-pointer "
+          >
+            <div className="relative w-full h-[170px] overflow-hidden group ">
               <Image
                 src={"/images/item-image1.png"}
                 alt="/images/item-image1.png"

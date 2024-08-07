@@ -1,5 +1,6 @@
 "use client";
 import Navbar from "@/components/layouts/Navbar/Navbar";
+import Category from "@/components/organisms/Category/Category";
 import Client from "@/components/organisms/Client/Client";
 import Course from "@/components/organisms/Course/Course";
 import Hero from "@/components/organisms/Hero/Hero";
@@ -30,6 +31,9 @@ export default function Home() {
       <section className="container mx-auto pt-24 relative">
         <Course />
       </section>
+      <div className="container mx-auto pt-24 relative">
+        <Category />
+      </div>
     </>
   );
 }
