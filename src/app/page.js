@@ -1,8 +1,9 @@
+"use client";
 import Navbar from "@/components/layouts/Navbar/Navbar";
 import Client from "@/components/organisms/Client/Client";
+import Course from "@/components/organisms/Course/Course";
 import Hero from "@/components/organisms/Hero/Hero";
 import Image from "next/image";
-import Link from "next/link";
 
 export default function Home() {
   return (
@@ -23,21 +24,11 @@ export default function Home() {
           <Hero />
         </div>
       </section>
-      <section className="container mx-auto pt-24">
+      <section className="container mx-auto pt-24 relative">
         <Client />
       </section>
-      <section className="container mx-auto pt-24">
-        <div className="flex justify-between items-center">
-          <div className="w-auto">
-            <h3 className=" text-gray-600">New Classes</h3>
-            <h4 className="text-xl">
-              Summer <span className="text-teal-500">Productive</span>
-            </h4>
-          </div>
-          <div className="w-auto">
-            <Link href="/">View All Courses</Link>
-          </div>
-        </div>
+      <section className="container mx-auto pt-24 relative">
+        <Course />
       </section>
     </>
   );
