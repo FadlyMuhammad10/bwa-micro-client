@@ -1,43 +1,6 @@
-import BusinessDevelopment from "../../../../public/images/icon-business-development.svg";
-import ContentWriter from "../../../../public/images/icon-content-writer.svg";
-import ProductAdv from "../../../../public/images/icon-product-advertisement.svg";
-import CustomerRelation from "../../../../public/images/icon-customer-relationship.svg";
-import GameDev from "../../../../public/images/icon-game-development.svg";
-import TravelGuide from "../../../../public/images/icon-travel-guidance.svg";
+import { CATEGORY_OPTIONS } from "@/constants";
 
 export default function Category() {
-  const data = [
-    {
-      title: "Business Development",
-      icon: <BusinessDevelopment />,
-      member: "12.493",
-    },
-    {
-      title: "Content Writer",
-      icon: <ContentWriter />,
-      member: "839",
-    },
-    {
-      title: "Product Advertisement",
-      icon: <ProductAdv />,
-      member: "478",
-    },
-    {
-      title: "Customer Relationship",
-      icon: <CustomerRelation />,
-      member: "553",
-    },
-    {
-      title: "Game Development",
-      icon: <GameDev />,
-      member: "7.339",
-    },
-    {
-      title: "Travel Guidance",
-      icon: <TravelGuide />,
-      member: "83",
-    },
-  ];
   return (
     <>
       <div className="flex justify-between items-center">
@@ -49,7 +12,7 @@ export default function Category() {
         </div>
       </div>
       <div className="grid grid-cols-6 gap-9 mt-6 min-w-[172px] max-h-[219px] ">
-        {data.map((item, index) => (
+        {CATEGORY_OPTIONS.map((item, index) => (
           <div
             key={index}
             className="relative border border-border p-8 cursor-pointer transition-all duration-200 group hover:bg-indigo-600 hover:text-white "

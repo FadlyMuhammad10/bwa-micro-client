@@ -17,9 +17,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} relative overflow-x-hidden `}>
         <main>{children}</main>
-        <footer className="mt-24 relative h-[358px] bg-[#161A4F]">
-          <Footer />
-        </footer>
+        {/* <Footer /> */}
       </body>
     </html>
   );

@@ -1,8 +1,12 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 
 export default function Course() {
+  const router = useRouter();
+
   return (
     <>
       <div className="flex justify-between items-center">
@@ -23,6 +27,7 @@ export default function Course() {
           <div
             key={index}
             className="flex flex-col gap-4 hover:cursor-pointer "
+            onClick={() => router.push(`/detail-course/${1}`)}
           >
             <div className="relative w-full h-[170px] overflow-hidden group ">
               <Image
@@ -32,6 +37,7 @@ export default function Course() {
                 height={232}
                 className="w-full h-full object-cover"
               />
+              <div className="absolute inset-0 z-0 w-full h-full group-hover:bg-[#2E37A4] opacity-75"></div>
               <div className="absolute inset-0 flex items-center justify-center opacity-0 -translate-x-full group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-500 ease-in-out ">
                 <Image
                   src={"/images/icon-play.svg"}

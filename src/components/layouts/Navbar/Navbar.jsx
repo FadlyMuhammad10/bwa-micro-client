@@ -11,7 +11,7 @@ export default function Navbar() {
       </div>
       <div className="inline-flex items-center gap-16  text-white text-lg ">
         <Link href="/">
-          <div className="text-teal-500">Home</div>
+          <div className="hover:text-teal-500">Home</div>
         </Link>
         <Link href="/">
           <div className="hover:text-teal-500">Pricing</div>
