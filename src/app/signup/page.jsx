@@ -1,18 +1,16 @@
-"use client";
 import InputLabel from "@/components/atoms/InputLabel";
+import InputSelectLabel from "@/components/atoms/InputSelectLabel";
 import Footer from "@/components/layouts/Footer/Footer";
 import Navbar from "@/components/layouts/Navbar/Navbar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 
-export default function SigninPage() {
-  const router = useRouter();
+export default function SignupPage() {
   return (
     <>
       <section className="h-screen">
         <div className="container mx-auto relative inset-0 z-0 pt-10">
-          <Navbar titleBtn={"Register"} href={"/signup"} />
+          <Navbar titleBtn={"Login"} href={"/signin"} />
         </div>
         <div className="container mx-auto relative ">
           <div className="w-[85%] mx-auto">
@@ -25,6 +23,11 @@ export default function SigninPage() {
                     <span className="font-semibold">Goals</span>
                   </h1>
                   <InputLabel
+                    label={"Full Name"}
+                    type={"text"}
+                    placeholder={"Full Name"}
+                  />
+                  <InputLabel
                     label={"Email Address"}
                     type={"email"}
                     placeholder={"Email Address"}
@@ -35,11 +38,10 @@ export default function SigninPage() {
                     placeholder={"Password"}
                   />
 
-                  <Button
-                    className="w-full bg-[#FE721C] hover:bg-orange-400 rounded-none  transition-all duration-200"
-                    onClick={() => router.push("/")}
-                  >
-                    Login
+                  <InputSelectLabel label={"Occupation"} />
+
+                  <Button className="w-full bg-[#FE721C] hover:bg-orange-400 rounded-none  transition-all duration-200">
+                    Register
                   </Button>
                 </div>
               </div>
@@ -48,7 +50,7 @@ export default function SigninPage() {
                   <div className=" border-indigo-700 border-2 w-[360px] h-[442px] absolute right-0   -z-50" />
                   <div className="w-full h-full absolute ml-8 mt-10  ">
                     <Image
-                      src={"/images/img-hero-mbak-tamara-cakep.jpg"}
+                      src={"/images/img-hero-mas-james-cakep.jpg"}
                       alt="hero-image-login"
                       width={369}
                       height={440}
@@ -61,7 +63,7 @@ export default function SigninPage() {
                         Netflix
                       </p>
                       <span className="text-[#7186A0]">
-                        Tamara, Apps Developer
+                        James, Apps Developer
                       </span>
                     </div>
                   </div>

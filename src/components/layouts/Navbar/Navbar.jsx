@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import Logo from "../../../../public/images/logo.svg";
 
-export default function Navbar({ titleBtn }) {
+export default function Navbar({ titleBtn, href }) {
   const router = useRouter();
   const pathname = usePathname();
   const isAuthPage = pathname === "/signin" || pathname === "/signup";
@@ -42,8 +42,8 @@ export default function Navbar({ titleBtn }) {
         </Link>
         <div>
           <Button
-            className="bg-[#4D55BC] hover:bg-indigo-800 rounded-none"
-            onClick={() => router.push("/signin")}
+            className="bg-[#4D55BC] hover:bg-indigo-800 rounded-none w-[120px] h-[50px] "
+            onClick={() => router.push(href)}
           >
             {titleBtn}
           </Button>

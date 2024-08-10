@@ -25,7 +25,7 @@ export default function HeroDetail() {
         </div>
       </div>
       <div className="container mx-auto relative inset-0 z-0 pt-10">
-        <Navbar titleBtn={"Login"} />
+        <Navbar titleBtn={"Login"} href={"/signin"} />
       </div>
     </>
   );
