@@ -1,15 +1,33 @@
+"use client";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
+import Logo from "../../../../public/images/logo.svg";
 
-export default function Navbar() {
+export default function Navbar({ titleBtn }) {
+  const router = useRouter();
+  const pathname = usePathname();
+  const isAuthPage = pathname === "/signin" || pathname === "/signup";
   return (
     <header className="flex justify-between items-center">
       <div className="logo">
-        <Image src={"/images/logo.svg"} alt="logo" width={37} height={54} />
+        {isAuthPage ? (
+          <>
+            <Logo className="text-[#132B50]" />
+          </>
+        ) : (
+          <>
+            <Logo className="text-white" />
+          </>
+        )}
       </div>
-      <div className="inline-flex items-center gap-16  text-white text-lg ">
+      <div
+        className={`inline-flex items-center gap-16  ${
+          isAuthPage ? "text-[#132B50]" : "text-white"
+        } text-lg`}
+      >
         <Link href="/">
           <div className="hover:text-teal-500">Home</div>
         </Link>
@@ -23,8 +41,11 @@ export default function Navbar() {
           <div className="hover:text-teal-500">Story</div>
         </Link>
         <div>
-          <Button className="bg-[#4D55BC] hover:bg-indigo-800 rounded-none">
-            Masuk
+          <Button
+            className="bg-[#4D55BC] hover:bg-indigo-800 rounded-none"
+            onClick={() => router.push("/signin")}
+          >
+            {titleBtn}
           </Button>
         </div>
       </div>

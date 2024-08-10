@@ -17,7 +17,7 @@ export default function Header() {
         <div className="sunshine -z-50" />
       </div>
       <div className="container mx-auto pt-10 absolute top-0 left-0 right-0 bottom-0 ">
-        <Navbar />
+        <Navbar titleBtn={"Login"} />
         <Hero />
       </div>
     </>
