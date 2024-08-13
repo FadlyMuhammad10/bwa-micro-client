@@ -1,13 +1,24 @@
 "use client";
-import InputLabel from "@/components/atoms/InputLabel";
+import FormInputLabel from "@/components/atoms/FormInputLabel";
 import Footer from "@/components/layouts/Footer/Footer";
 import Navbar from "@/components/layouts/Navbar/Navbar";
 import { Button } from "@/components/ui/button";
+import { Form } from "@/components/ui/form";
+import { formSignInSchema } from "@/lib/form-schema";
+import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { useForm } from "react-hook-form";
 
 export default function SigninPage() {
   const router = useRouter();
+
+  const form = useForm({
+    resolver: zodResolver(formSignInSchema),
+  });
+  const onSubmit = async (values) => {
+    console.log(values);
+  };
   return (
     <>
       <section className="h-screen">
@@ -24,23 +35,34 @@ export default function SigninPage() {
                     <br /> Finish Your{" "}
                     <span className="font-semibold">Goals</span>
                   </h1>
-                  <InputLabel
-                    label={"Email Address"}
-                    type={"email"}
-                    placeholder={"Email Address"}
-                  />
-                  <InputLabel
-                    label={"Password"}
-                    type={"password"}
-                    placeholder={"Password"}
-                  />
+                  <Form {...form}>
+                    <form
+                      onSubmit={form.handleSubmit(onSubmit)}
+                      className="space-y-5 text-black"
+                    >
+                      <FormInputLabel
+                        form={form}
+                        name={"email"}
+                        label={"Email Address"}
+                        type={"email"}
+                        placeholder={"Email Address"}
+                      />
+                      <FormInputLabel
+                        form={form}
+                        name={"password"}
+                        label={"Password"}
+                        type={"password"}
+                        placeholder={"Password"}
+                      />
 
-                  <Button
-                    className="w-full bg-[#FE721C] hover:bg-orange-400 rounded-none  transition-all duration-200"
-                    onClick={() => router.push("/")}
-                  >
-                    Login
-                  </Button>
+                      <Button
+                        type="submit"
+                        className="w-full bg-[#FE721C] hover:bg-orange-400 rounded-none  transition-all duration-200"
+                      >
+                        Login
+                      </Button>
+                    </form>
+                  </Form>
                 </div>
               </div>
               <div className="transform translate-y-1/2 relative right-0">

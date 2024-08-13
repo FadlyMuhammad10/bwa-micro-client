@@ -42,7 +42,7 @@ export default function Navbar({ titleBtn, href }) {
         </Link>
         <div>
           <Button
-            className="bg-[#4D55BC] hover:bg-indigo-800 rounded-none w-[120px] h-[50px] "
+            className="bg-[#4D55BC] hover:bg-indigo-800 rounded-none px-4 py-2 "
             onClick={() => router.push(href)}
           >
             {titleBtn}
