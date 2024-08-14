@@ -125,3 +125,8 @@
   bottom: 0;
   position: fixed;
 }
+
+.video-players iframe {
+  width: 100%;
+  height: 650px;
+}

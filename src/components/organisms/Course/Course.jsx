@@ -49,7 +49,9 @@ export default function Course() {
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <h1 className="font-semibold">Graphic Designer 101</h1>
+              <h1 className="font-semibold text-[#132B50]">
+                Graphic Designer 101
+              </h1>
               <p className="text-gray-600 text-sm">All Levels</p>
             </div>
           </div>
