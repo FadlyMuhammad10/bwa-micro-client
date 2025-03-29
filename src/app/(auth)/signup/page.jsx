@@ -8,14 +8,24 @@ import { Form } from "@/components/ui/form";
 import { formSignUpSchema } from "@/lib/form-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import { SetSignup } from "../../../../services/auth";
 
 export default function SignupPage() {
+  const router = useRouter();
   const form = useForm({
     resolver: zodResolver(formSignUpSchema),
   });
   const onSubmit = async (values) => {
-    console.log(values);
+    try {
+      await SetSignup(values);
+      toast.success("Account created successfully");
+      router.push("/signin");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
   return (
     <>

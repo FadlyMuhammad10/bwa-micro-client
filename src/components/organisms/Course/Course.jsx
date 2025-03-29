@@ -2,11 +2,25 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import axios from "../../../configs/axios";
+import { GetCourse } from "../../../../services/participant";
 
 export default function Course() {
   const router = useRouter();
+  const [courses, setCourses] = useState([]);
 
+  const fetchData = useCallback(async () => {
+    try {
+      const result = await GetCourse();
+      setCourses(result.data);
+    } catch (error) {
+      console.error("Error fetching experience data:", error);
+    }
+  }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
   return (
     <>
       <div className="flex justify-between items-center">
@@ -23,15 +37,15 @@ export default function Course() {
         </div>
       </div>
       <div className="grid grid-cols-4 gap-6 mt-6 min-w-[272px] max-h-[232px]">
-        {Array.from({ length: 4 }).map((_, index) => (
+        {/* {courses.map((item, index) => (
           <div
             key={index}
             className="flex flex-col gap-4 hover:cursor-pointer "
-            onClick={() => router.push(`/detail-course/${1}`)}
+            onClick={() => router.push(`/detail-course/${item.id}`)}
           >
             <div className="relative w-full h-[170px] overflow-hidden group ">
               <Image
-                src={"/images/item-image1.png"}
+                src={item.thumbnail}
                 alt="/images/item-image1.png"
                 width={272}
                 height={232}
@@ -49,13 +63,11 @@ export default function Course() {
               </div>
             </div>
             <div className="flex flex-col gap-1">
-              <h1 className="font-semibold text-[#132B50]">
-                Graphic Designer 101
-              </h1>
-              <p className="text-gray-600 text-sm">All Levels</p>
+              <h1 className="font-semibold text-[#132B50]">{item.name}</h1>
+              <p className="text-gray-600 text-sm">{item.level}</p>
             </div>
           </div>
-        ))}
+        ))} */}
       </div>
     </>
   );

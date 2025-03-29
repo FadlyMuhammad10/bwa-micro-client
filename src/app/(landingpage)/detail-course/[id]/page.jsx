@@ -10,13 +10,26 @@ import TransitionPrice from "@/components/organisms/CourseDetail/TransitionPrice
 import VideoItem from "@/components/organisms/CourseDetail/VideoItem";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import { FEATURE_OPTIONS } from "@/constants";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { CSSTransition } from "react-transition-group";
+import { GetCourseDetail } from "../../../../../services/participant";
 
-export default function DetailCoursePage() {
+export default function DetailCoursePage({ params }) {
   const footer = useRef(null);
   const [isSticky, setIsSticky] = useState(true);
+  const [courseDetail, setCourseDetail] = useState();
+
+  const fetchData = useCallback(async () => {
+    try {
+      const result = await GetCourseDetail(params.id);
+
+      setCourseDetail(result.data);
+    } catch (error) {
+      console.error("Error fetching experience data:", error);
+    }
+  }, []);
   useEffect(() => {
+    fetchData();
     const stickyOffsetTop = footer.current.getBoundingClientRect().top;
     const stickyMetaToggler = () => {
       setIsSticky(stickyOffsetTop >= window.scrollY + window.innerHeight);
@@ -30,7 +43,7 @@ export default function DetailCoursePage() {
     <>
       <section>
         <div className="relative top-0 left-0 right-0 bottom-0 bg-indigo-900 h-[660px] z-0">
-          <HeroDetail />
+          <HeroDetail data={courseDetail} />
         </div>
         <div className="container mx-auto">
           <div className="w-3/4 mx-auto transform -translate-y-1/2">
@@ -48,7 +61,7 @@ export default function DetailCoursePage() {
             classNames={"meta-price"}
             unmountOnExit
           >
-            <TransitionPrice />
+            <TransitionPrice data={courseDetail} />
           </CSSTransition>
         </div>
         <div className="container mx-auto">
@@ -56,22 +69,7 @@ export default function DetailCoursePage() {
             <div className="flex flex-col gap-4">
               <TitleSection word1={"About"} word2={"Course"} />
               <div className="flex flex-col gap-4 text-gray-600 text-lg leading-relaxed ">
-                <p>
-                  MERN Stack adalah bagian dari Full-Stack Web Developer yang
-                  difokuskan kepada JavaScript (Full-Stack JavaScript
-                  Developer). M untuk MongoDB, E untuk ExpressJS, R untuk
-                  ReactJS, dan N untuk NodeJS. Kalian akan mempelajari semua hal
-                  tersebut pada kelas ini. Tapi bukan hanya sekedar ngoding aja
-                  namun kalian akan mulai dari bagian UI dan UX sehingga paham
-                  betul bagaimana caranya membangun suatu website yang memiliki
-                  better experience.
-                </p>
-                <p>
-                  Setelah proses Wireframe selesai maka akan dilanjutkan kepada
-                  tahap Visual Design dan Web Development. Silakan bergabung
-                  untuk mempelajarinya lebih lanjut. Kami akan tunggu kalian di
-                  kelas ya.
-                </p>
+                <p>{courseDetail?.description}</p>
               </div>
             </div>
             <div className="flex flex-col gap-4 mt-8">
@@ -86,13 +84,13 @@ export default function DetailCoursePage() {
               <TitleSection word1={"You Will"} word2={"Learn"} />
               <div className="w-1/2">
                 <Accordion type="single" collapsible className="w-full">
-                  {Array.from({ length: 3 }).map((_, index) => (
+                  {courseDetail?.chapters.map((item, index) => (
                     <AccordionItem
                       key={index}
                       value={`item-${index}`}
                       className="border text-[#7186A0] "
                     >
-                      <VideoItem />
+                      <VideoItem data={item} />
                     </AccordionItem>
                   ))}
                 </Accordion>
@@ -100,7 +98,7 @@ export default function DetailCoursePage() {
             </div>
             <div className="flex flex-col gap-4 mt-8">
               <TitleSection word1={"Our"} word2={"Instructor"} />
-              <Instructor />
+              <Instructor data={courseDetail} />
             </div>
             <div className="flex flex-col gap-4 mt-8">
               <TitleSection word1={"Happy"} word2={"Students"} />

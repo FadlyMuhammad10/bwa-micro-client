@@ -79,7 +79,7 @@ export default function Footer() {
         <Separator className="my-10 bg-[#333769]" />
         <div className="text-center">
           <p className="text-[#333769]">
-            © 2024 Copyright Micro by BuildWith Angga. All Rights Reserved.
+            © 2024 Copyright. All Rights Reserved.
           </p>
         </div>
       </div>

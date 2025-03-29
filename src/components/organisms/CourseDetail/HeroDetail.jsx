@@ -1,14 +1,18 @@
+"use client";
 import Navbar from "@/components/layouts/Navbar/Navbar";
-import React from "react";
 import Youtube from "react-youtube";
 
-export default function HeroDetail() {
+export default function HeroDetail({ data }) {
+  if (!data) {
+    return <div></div>;
+  }
+
   return (
     <>
       <div className="video-wrapper absolute inset-0 z-0">
         <Youtube
-          videoId="MLMZ4e6WkZE"
-          id="MLMZ4e6WkZE"
+          videoId={data.chapters[0].lessons[0].video}
+          id={data.chapters[0].lessons[0].video}
           opts={{ playerVars: { loop: 1, autoplay: 1, controls: 0, mute: 1 } }}
           onEnd={(event) => {
             event.target.playVideo();
@@ -19,9 +23,7 @@ export default function HeroDetail() {
       <div className="meta-title absolute inset-0 z-0 w-full object-fill flex justify-center items-center">
         <div className="text-center">
           <h3 className="text-lg text-white">Online Course:</h3>
-          <h4 className="text-6xl text-teal-500 font-semibold">
-            Graphic Designer 101
-          </h4>
+          <h4 className="text-6xl text-teal-500 font-semibold">{data.name}</h4>
         </div>
       </div>
       <div className="container mx-auto relative inset-0 z-0 pt-10">

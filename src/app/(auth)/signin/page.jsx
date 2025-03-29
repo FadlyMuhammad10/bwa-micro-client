@@ -9,6 +9,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
+import { SetSignin } from "../../../../services/auth";
+import Cookies from "js-cookie";
+import { toast } from "react-toastify";
 
 export default function SigninPage() {
   const router = useRouter();
@@ -17,7 +20,15 @@ export default function SigninPage() {
     resolver: zodResolver(formSignInSchema),
   });
   const onSubmit = async (values) => {
-    console.log(values);
+    try {
+      const response = await SetSignin(values);
+      const token = response.token;
+      const tokenBase64 = btoa(token);
+      Cookies.set("token", tokenBase64);
+      router.push("/");
+    } catch (error) {
+      toast.error("Something went wrong");
+    }
   };
   return (
     <>

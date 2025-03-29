@@ -1,4 +1,6 @@
 import { Poppins } from "next/font/google";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "../globals.css";
 
 const poppins = Poppins({
@@ -16,6 +18,7 @@ export default function AuthRootLayout({ children }) {
     <html lang="en">
       <body className={`${poppins.className} relative overflow-x-hidden `}>
         <main>{children}</main>
+        <ToastContainer />
       </body>
     </html>
   );

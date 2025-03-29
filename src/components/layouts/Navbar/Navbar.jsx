@@ -1,11 +1,5 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import Image from "next/image";
-import Link from "next/link";
-import { usePathname, useRouter } from "next/navigation";
-import React, { useState } from "react";
-import Logo from "../../../../public/images/logo.svg";
-import { Separator } from "@/components/ui/separator";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -14,12 +8,38 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator";
+import Cookies from "js-cookie";
+import Image from "next/image";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import Logo from "../../../../public/images/logo.svg";
+import { jwtDecode } from "jwt-decode";
 
 export default function Navbar({ titleBtn, href }) {
   const [isLogin, setIsLogin] = useState(false);
+  const [user, setUser] = useState();
   const router = useRouter();
   const pathname = usePathname();
   const isAuthPage = pathname === "/signin" || pathname === "/signup";
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) {
+      const jwtToken = atob(token);
+      const payload = jwtDecode(jwtToken);
+      setIsLogin(true);
+      setUser(payload);
+    }
+  }, []);
+
+  const onLogout = () => {
+    Cookies.remove("token");
+    router.push("/");
+    setIsLogin(false);
+  };
+
   return (
     <header className="flex justify-between items-center">
       <div className="logo">
@@ -58,7 +78,7 @@ export default function Navbar({ titleBtn, href }) {
               <DropdownMenu>
                 <DropdownMenuTrigger className="border-none outline-none">
                   <div className="inline-flex items-center gap-4">
-                    <div>Hi, User</div>
+                    <div>Hi, {user?.name}</div>
                     <Image
                       src="/images/default-avatar.svg"
                       alt="avatar"
@@ -76,7 +96,7 @@ export default function Navbar({ titleBtn, href }) {
                   </DropdownMenuItem>
                   <DropdownMenuItem>My Courses</DropdownMenuItem>
                   <DropdownMenuItem>Settings</DropdownMenuItem>
-                  <DropdownMenuItem>Logout</DropdownMenuItem>
+                  <DropdownMenuItem onClick={onLogout}>Logout</DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
             </div>

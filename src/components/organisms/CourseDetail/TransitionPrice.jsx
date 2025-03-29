@@ -1,7 +1,11 @@
 import { Button } from "@/components/ui/button";
 import React from "react";
+import { NumericFormat } from "react-number-format";
 
-export default function TransitionPrice() {
+export default function TransitionPrice({ data }) {
+  if (!data) {
+    return null;
+  }
   return (
     <>
       <div className="meta-price w-full bg-white z-50 px-3 py-4">
@@ -10,10 +14,16 @@ export default function TransitionPrice() {
             <div className="flex items-center">
               <div className="w-full">
                 <h2 className="text-gray-600">Name Course</h2>
-                <h3 className="text-2xl text-gray-900">Graphic Designer 101</h3>
+                <h3 className="text-2xl text-gray-900">{data.name}</h3>
               </div>
               <h5 className="text-2xl text-teal-500 whitespace-nowrap mr-4">
-                Free
+                <NumericFormat
+                  value={data.price}
+                  prefix="Rp. "
+                  displayType="text"
+                  thousandSeparator="."
+                  decimalSeparator=","
+                />
               </h5>
               <div rel="noopener noreferrer">
                 <Button className="bg-[#FE721C] hover:bg-orange-400 rounded-none  transition-all duration-200">
